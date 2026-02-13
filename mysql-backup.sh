@@ -41,9 +41,10 @@ notify_failure() {
         -d "$payload" "$NOTIFY_WEBHOOK_URL" >/dev/null 2>&1 || true
 }
 
+TMP_DIR=""
 cleanup() {
     rm -f "$LOCK_FILE"
-    rm -rf "$TMP_DIR" 2>/dev/null || true
+    [[ -n "$TMP_DIR" ]] && rm -rf "$TMP_DIR" 2>/dev/null || true
 }
 trap cleanup EXIT
 
