@@ -130,6 +130,11 @@ for db in $DATABASES; do
     TOTAL=$((TOTAL + 1))
 
     # Dump + compress
+    GTID_FLAG=""
+    if mysqldump --help 2>&1 | grep -q 'set-gtid-purged'; then
+        GTID_FLAG="--set-gtid-purged=OFF"
+    fi
+
     if ! mysqldump \
         --host="$MYSQL_HOST" \
         --port="$MYSQL_PORT" \
@@ -139,7 +144,7 @@ for db in $DATABASES; do
         --routines \
         --triggers \
         --events \
-        --set-gtid-purged=OFF \
+        $GTID_FLAG \
         "$db" 2>>"$LOG_FILE" | gzip > "$LOCAL_PATH"; then
 
         log "ERROR" "mysqldump failed for $db"
