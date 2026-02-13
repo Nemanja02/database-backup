@@ -71,7 +71,7 @@ if ! command -v mysqldump &>/dev/null; then
     if command -v apt-get &>/dev/null; then
         install_pkg default-mysql-client 2>/dev/null || install_pkg mysql-client
     elif command -v yum &>/dev/null || command -v dnf &>/dev/null; then
-        install_pkg mariadb 2>/dev/null || install_pkg mysql-community-client
+        install_pkg mariadb 2>/dev/null || install_pkg community-mysql 2>/dev/null || install_pkg mysql-community-client
     elif command -v apk &>/dev/null; then
         install_pkg mysql-client
     else
