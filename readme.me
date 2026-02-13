@@ -16,14 +16,14 @@ A portable, zero-dependency MySQL backup solution that runs on any Linux server.
 
 ```bash
 # 1. Clone / copy to your server
-git clone <your-repo> /opt/mysql-backup-service
+git clone https://github.com/Nemanja02/database-backup.git /opt/mysql-backup-service
 cd /opt/mysql-backup-service
 
-# 2. Configure
-cp .env.example .env
-nano .env          # fill in your MySQL + S3 credentials
+# 2. Install (requires root) — will prompt for config if .env doesn't exist
+sudo bash install.sh
 
-# 3. Install (requires root)
+# Or generate .env separately first, then install:
+bash generate-env.sh
 sudo bash install.sh
 ```
 
